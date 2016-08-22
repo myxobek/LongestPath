@@ -90,4 +90,28 @@ class LongestPathTest extends PHPUnit_Framework_TestCase
     }
     
     ///////////////////////////////////////////////////////////////////////////
+    
+    public function testGetAnswer4()
+    {
+        $longestPath = new LongestPath();
+        
+        $longestPath->init( $this->cur_dir . '/test_files/test_4.txt'  );
+        
+        $this->assertEquals( $longestPath->getAnswer()['length'], 11 );
+        $this->assertEquals( $longestPath->getAnswer()['path'], '1496-1479-1407-1371-1133-951-693-542-343-32-27' );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public function testGetAnswer5()
+    {
+        $longestPath = new LongestPath();
+        
+        $longestPath->init( $this->cur_dir . '/test_files/test_5.txt'  );
+        
+        $this->assertEquals( $longestPath->getAnswer()['length'], 14 );
+        $this->assertEquals( $longestPath->getAnswer()['path'], '1481-1224-1109-1093-1090-1039-857-630-505-496-352-342-254-67' );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
 }
