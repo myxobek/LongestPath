@@ -6,17 +6,23 @@ class LongestPathTest extends PHPUnit_Framework_TestCase
 {
     private $cur_dir = '';
     
+    ///////////////////////////////////////////////////////////////////////////
+    
     private function _getCurrentFileDirectory()
     {
         return realpath(dirname(__FILE__));
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
     
     public function SetUp()
     {
         $this->cur_dir = $this->_getCurrentFileDirectory();
     }
     
-    public function test1()
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public function testInit()
     {
         $longestPath = new LongestPath();
         
@@ -27,19 +33,61 @@ class LongestPathTest extends PHPUnit_Framework_TestCase
         $this->assertTrue( is_array( $longestPath->area ) );
     }
     
+    ///////////////////////////////////////////////////////////////////////////
+    
     public function testInt2Point()
     {
         $longestPath = new LongestPath();
         
-        $this->assertEquals( $longestPath->point2int(['x' => 1, 'y' => 1]), 1002 );
-        $this->assertEquals( $longestPath->point2int(['x' => 1000, 'y' => 1000]), 1002000 );
+        $this->assertEquals( $longestPath->point2int(['x' => 1, 'y' => 1]), 10001 );
+        $this->assertEquals( $longestPath->point2int(['x' => 1000, 'y' => 1000]), 10001000 );
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
     
     public function testPoint2Int()
     {
         $longestPath = new LongestPath();
         
-        $this->assertEquals( $longestPath->int2point(1002), ['x' => 1, 'y' => 1] );
-        $this->assertEquals( $longestPath->int2point(1002000), ['x' => 1000, 'y' => 1000 ]);
+        $this->assertEquals( $longestPath->int2point(10001), ['x' => 1, 'y' => 1] );
+        $this->assertEquals( $longestPath->int2point(10001000), ['x' => 1000, 'y' => 1000 ]);
     }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public function testGetAnswer1()
+    {
+        $longestPath = new LongestPath();
+    
+        $longestPath->init( $this->cur_dir . '/test_files/test_1.txt'  );
+    
+        $this->assertEquals( $longestPath->getAnswer()['length'], 5 );
+        $this->assertEquals( $longestPath->getAnswer()['path'], '9-5-3-2-1' );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public function testGetAnswer2()
+    {
+        $longestPath = new LongestPath();
+        
+        $longestPath->init( $this->cur_dir . '/test_files/test_2.txt'  );
+        
+        $this->assertEquals( $longestPath->getAnswer()['length'], 1 );
+        $this->assertEquals( $longestPath->getAnswer()['path'], '1' );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
+    
+    public function testGetAnswer3()
+    {
+        $longestPath = new LongestPath();
+        
+        $longestPath->init( $this->cur_dir . '/test_files/test_3.txt'  );
+        
+        $this->assertEquals( $longestPath->getAnswer()['length'], 3 );
+        $this->assertEquals( $longestPath->getAnswer()['path'], '3-2-1' );
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
 }
